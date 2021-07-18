@@ -149,20 +149,23 @@ int maximum(nodePtr head) //returns the maximum of the list
     return min;
 }
 
-nodePtr sortAcc(nodePtr head)
+void sortAcc(nodePtr *head)
 {
-    nodePtr head2 = (nodePtr)malloc(sizeof(node));
-    int t = minimum(head);
-    head2->data = t;
-    head2->next = NULL;
-    del(t, &head);
-    while (length(head) != 0)
+    nodePtr temp = *head;
+    nodePtr curr = temp;
+    nodePtr next = temp->next;
+    while(curr && next)
     {
-        int v = minimum(head);
-        atLast(v, &head2);
-        del(v, &head);
+        while(next)
+        {
+            if(curr->data > next->data)
+            {
+                swap(curr->data,next->data);
+            }
+            next = next->next;
+        }
+        curr = curr->next;
     }
-    return head2;
 }
 
 int main()
@@ -181,21 +184,7 @@ int main()
         cin >> t;
         atLast(t, &head);
     }
-    del(9, &head);
-
-    // nodePtr tt = findList(15, head);
-    // if (tt)
-    // cout << endl << tt->data << endl;
-    // cout << length(head);
-    head = pushAtFirst(0, head);
-    insertAtPos(17, 7, &head);
-    insertAfter(7, 19, &head);
-    // head = sortAcc(head);
-    while(length(head))
-    {
-        int t = minimum(head);
-        del(t, &head);
-    }
+    sortAcc(&head);
     printList(head);
     return 0;
 }
