@@ -149,12 +149,12 @@ int maximum(nodePtr head) //returns the maximum of the list
     return min;
 }
 
-void sortAcc(nodePtr *head)
+void sortAcc(nodePtr *head)//bubble sort technique to sort the list in ascending order
 {
     nodePtr temp = *head;
     nodePtr curr = temp;
     nodePtr next = temp->next;
-    while(curr && next)
+    while(curr)
     {
         while(next)
         {
@@ -167,6 +167,27 @@ void sortAcc(nodePtr *head)
         curr = curr->next;
     }
 }
+
+void sortdec(nodePtr *head)//bubble sort technique to sort the list in decending order
+{
+    nodePtr temp = *head;
+    nodePtr curr = temp;
+    nodePtr next = temp->next;
+    while(curr)
+    {
+        next = curr->next;
+        while(next)
+        {
+            if(curr->data < next->data)
+            {
+                swap(curr->data,next->data);
+            }
+            next = next->next;
+        }
+        curr = curr->next;
+    }
+}
+
 
 int main()
 {
